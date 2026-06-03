@@ -39,6 +39,6 @@ void Administrador::mostrarDatos(){
     cout<<"Codigo: "<<getCodigoEmpleado()<<endl;
     cout<<"Puesto: "<<getPuesto()<<endl;
     cout<<"Salario: "<<calcularSalario()<<endl;
-    cout<<"Huespedes atendidos: "<<huespedesAtendidos<<endl;
+    cout<<"Huespedes atendidos: "<<huespedesAtendidos()<<endl;
 }
  
