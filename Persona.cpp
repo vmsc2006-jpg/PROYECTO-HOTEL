@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 using namespace std;
 
 class Persona{
@@ -10,6 +11,7 @@ class Persona{
 
     public:
     Persona();
+    virtual ~Persona() {}
 
     void setNombre(string nombre);
     string getNombre();

@@ -8,6 +8,7 @@ class Empleado : public Persona{
 
     public:
     Empleado();
+    virtual ~Empleado() {}
 
     void setCodigoEmpleado(string);
     string getCodigoEmpleado();

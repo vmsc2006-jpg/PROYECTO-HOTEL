@@ -4,6 +4,7 @@ using namespace std;
 class Administrador : public Empleado{
     private:
     int huespedesAtendidos;
+    float comision;
 
     public:
     Administrador();
