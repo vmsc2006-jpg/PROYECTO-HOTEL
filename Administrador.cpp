@@ -12,9 +12,16 @@ class Administrador : public Empleado{
     void setHuespedesAtendidos(int);
     int getHuespedesAtendidos();
 
+    void agregarComision(float cantidad);
+    
+
     float calcularSalario();
     void mostrarDatos();
 };
+
+void Administrador::agregarComision(float cantidad){
+    this->comision += cantidad;
+}
 
 Administrador::Administrador(){
     huespedesAtendidos = 0;
@@ -40,6 +47,6 @@ void Administrador::mostrarDatos(){
     cout<<"Codigo: "<<getCodigoEmpleado()<<endl;
     cout<<"Puesto: "<<getPuesto()<<endl;
     cout<<"Salario: "<<calcularSalario()<<endl;
-    cout<<"Huespedes atendidos: "<<huespedesAtendidos<<endl;
+    cout<<"Huespedes atendidos: "<<huespedesAtendidos<<endl; 
 }
  
