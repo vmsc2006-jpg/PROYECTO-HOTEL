@@ -23,6 +23,10 @@ private:
     vector<Renta*> rentas;
 public:
 
+    //=====================================
+    // MENU PRINCIPAL
+    //=====================================
+
     void menuPrincipal() {
     int opcion;
 
@@ -65,6 +69,11 @@ public:
 
     }while(opcion != 0);
 }
+
+    
+    //=====================================
+    // MODULO EMPLEADOS
+    //=====================================
 
     void menuEmpleados() {
     int opcion;
@@ -203,6 +212,11 @@ public:
 
     }while(opcion != 0);
 }
+
+
+    //=====================================
+    // MODULO CLIENTES
+    //=====================================
 
     void agregarCliente()
     {
@@ -379,7 +393,11 @@ public:
     }while(opcion != 0);
 }
 
-void menuRentas() {
+    //=====================================
+    // MODULO RENTAS
+    //=====================================
+
+    void menuRentas() {
         int opcion;
         int i, dias;
         string codCli, codEmp, codHab;
@@ -567,6 +585,12 @@ void menuRentas() {
         } while(opcion != 0);
     }
 
+
+    //=====================================
+    // FUNCIONALIDAD EXTRA
+    // ROOM SERVICE
+    //=====================================
+
     void menuRoomService() {
     string codHab;
     bool encontrada = false;
@@ -621,6 +645,11 @@ void menuRentas() {
         cout << "Error: Esa habitacion no esta rentada actualmente.\n";
     }
 }
+
+    
+    //=====================================
+    // MODULO HABITACIONES
+    //=====================================
 
     void menuHabitaciones() {
         int opcion, tipo, i;
@@ -777,6 +806,10 @@ void menuRentas() {
 
         } while(opcion != 0);
     }
+
+    //=====================================
+    // REPORTES
+    //=====================================
 
     void reporteClientes(){
         if(clientes.empty())
@@ -942,6 +975,9 @@ void menuRentas() {
     }while(opcion != 0);
 }
 
+    //=====================================
+    // DESTRUCTOR
+    //=====================================
     ~SistemaHotel()
     {
         for(Cliente* c : clientes)
