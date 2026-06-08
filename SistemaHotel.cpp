@@ -203,6 +203,138 @@ public:
 
     }while(opcion != 0);
 }
+
+    void agregarCliente()
+    {
+         Cliente* nuevo = new Cliente();
+
+    string nombre, direccion, telefono;
+    string rfc, correo, codigo;
+
+    cin.ignore();
+
+    cout << "Nombre: ";
+    getline(cin, nombre);
+
+    cout << "Direccion: ";
+    getline(cin, direccion);
+
+    cout << "Telefono: ";
+    getline(cin, telefono);
+
+    cout << "RFC: ";
+    getline(cin, rfc);
+
+    cout << "Correo: ";
+    getline(cin, correo);
+
+    cout << "Codigo de huesped: ";
+    getline(cin, codigo);
+
+    // VALIDAR CODIGO REPETIDO
+    for(Cliente* c : clientes)
+    {
+        if(c->getCodigoHuesped() == codigo)
+        {
+            cout << "Ese codigo ya existe.\n";
+            delete nuevo;
+            return;
+        }
+    }
+
+    nuevo->setNombre(nombre);
+    nuevo->setDireccion(direccion);
+    nuevo->setTelefono(telefono);
+    nuevo->setRFC(rfc);
+    nuevo->setCorreo(correo);
+    nuevo->setCodigoHuesped(codigo);
+
+    clientes.push_back(nuevo);
+
+    cout << "Cliente registrado correctamente.\n";
+    }
+
+    void consultarClientes()
+    {
+           if(clientes.empty())
+    {
+        cout << "\nNo hay clientes registrados.\n";
+        return;
+    }
+
+    for(Cliente* c : clientes)
+    {
+        c->mostrarDatos();
+        cout << endl;
+    }
+    }
+
+    void eliminarCliente()
+    {
+        string codigo;
+
+    cin.ignore();
+    cout << "Codigo de huesped a eliminar: ";
+    getline(cin, codigo);
+
+    for(auto it = clientes.begin(); it != clientes.end(); it++)
+    {
+        if((*it)->getCodigoHuesped() == codigo)
+        {
+            delete *it;
+            clientes.erase(it);
+
+            cout << "Cliente eliminado.\n";
+            return;
+        }
+    }
+
+    cout << "Cliente no encontrado.\n";
+    }
+
+    void actualizarCliente()
+    {
+            string codigo;
+
+    cin.ignore();
+    cout << "Codigo de huesped: ";
+    getline(cin, codigo);
+
+    for(Cliente* c : clientes)
+    {
+        if(c->getCodigoHuesped() == codigo)
+        {
+            string nombre, direccion, telefono, rfc, correo;
+
+            cout << "Nuevo nombre: ";
+            getline(cin, nombre);
+
+            cout << "Nueva direccion: ";
+            getline(cin, direccion);
+
+            cout << "Nuevo telefono: ";
+            getline(cin, telefono);
+
+            cout << "Nuevo RFC: ";
+            getline(cin, rfc);
+
+            cout << "Nuevo correo: ";
+            getline(cin, correo);
+
+            c->setNombre(nombre);
+            c->setDireccion(direccion);
+            c->setTelefono(telefono);
+            c->setRFC(rfc);
+            c->setCorreo(correo);
+
+            cout << "Cliente actualizado.\n";
+            return;
+        }
+    }
+
+    cout << "Cliente no encontrado.\n";
+    }
+
     
     void menuClientes() {
     int opcion;
@@ -220,18 +352,22 @@ public:
         switch(opcion){
             case 1:
                 // agregar cliente
+                agregarCliente();
                 break;
 
             case 2:
                 // consultar
+                consultarClientes();
                 break;
 
             case 3:
                 // eliminar
+                eliminarCliente();
                 break;
 
             case 4:
                 // actualizar
+                actualizarCliente();
                 break;
             case 0:
                 // regresar
@@ -642,6 +778,120 @@ void menuRentas() {
         } while(opcion != 0);
     }
 
+    void reporteClientes(){
+        if(clientes.empty())
+    {
+        cout << "\nNo hay clientes registrados.\n";
+        return;
+    }
+
+    cout << "\n===== LISTA DE CLIENTES =====\n";
+
+    for(Cliente* c : clientes)
+    {
+        c->mostrarDatos();
+        cout << endl;
+    }
+    }
+    void reporteHabitaciones(){
+         if(habitaciones.empty())
+    {
+        cout << "\nNo hay habitaciones registradas.\n";
+        return;
+    }
+
+    cout << "\n===== TODAS LAS HABITACIONES =====\n";
+
+    for(Habitacion* h : habitaciones)
+    {
+        h->mostrarDetalles();
+    }
+    }
+    void reporteHabitacionesDisponibles(){
+        bool encontrada = false;
+
+    cout << "\n===== HABITACIONES DISPONIBLES =====\n";
+
+    for(Habitacion* h : habitaciones)
+    {
+        if(h->getEstatus() == "Disponible")
+        {
+            h->mostrarDetalles();
+            encontrada = true;
+        }
+    }
+
+    if(!encontrada)
+    {
+        cout << "No hay habitaciones disponibles.\n";
+    }
+    }
+    void reporteHabitacionesNoDisponibles(){
+         bool encontrada = false;
+
+    cout << "\n===== HABITACIONES RENTADAS =====\n";
+
+    for(Habitacion* h : habitaciones)
+    {
+        if(h->getEstatus() == "Rentada")
+        {
+            h->mostrarDetalles();
+            encontrada = true;
+        }
+    }
+
+    if(!encontrada)
+    {
+        cout << "No hay habitaciones rentadas.\n";
+    }
+    }
+    void reporteEmpleados(){
+        if(empleados.empty())
+    {
+        cout << "\nNo hay empleados registrados.\n";
+        return;
+    }
+
+    cout << "\n===== LISTA DE EMPLEADOS =====\n";
+
+    for(Empleado* e : empleados)
+    {
+        e->mostrarDatos();
+        cout << endl;
+    }
+    }
+    void reporteEmpleadosPorTipo(){
+        string tipo;
+    bool encontrado = false;
+
+    cin.ignore();
+
+    cout << "\nIngrese el tipo de empleado:\n";
+    cout << "Gerente\n";
+    cout << "Administrador\n";
+    cout << "Servicio\n";
+    cout << "Tipo: ";
+
+    getline(cin, tipo);
+
+    cout << "\n===== EMPLEADOS ENCONTRADOS =====\n";
+
+    for(Empleado* e : empleados)
+    {
+        if(e->getPuesto() == tipo)
+        {
+            e->mostrarDatos();
+            cout << endl;
+            encontrado = true;
+        }
+    }
+
+    if(!encontrado)
+    {
+        cout << "No se encontraron empleados de ese tipo.\n";
+    }
+    }
+
     void menuReportes() {
     int opcion;
 
@@ -659,31 +909,34 @@ void menuRentas() {
 
         switch(opcion){
             case 1:
-                // Lista de Clientes
+                reporteClientes();
                 break;
 
             case 2:
-                // Lista de Habitaciones Totales
+                reporteHabitaciones();
                 break;
 
             case 3:
-                // Habitaciones Disponibles
+                reporteHabitacionesDisponibles();
                 break;
 
             case 4:
-                // Habitaciones No Disponibles
+                reporteHabitacionesNoDisponibles();
                 break;
+
             case 5:
-                // Lista de Empleados
+                reporteEmpleados();
                 break;
+
             case 6:
-                // Empleados por Tipo
+                reporteEmpleadosPorTipo();
                 break;
+
             case 0:
-                // Regresar
                 break;
+
             default:
-                cout<<"Opcion invalida\n";
+                cout << "Opcion invalida\n";
         }
 
     }while(opcion != 0);
