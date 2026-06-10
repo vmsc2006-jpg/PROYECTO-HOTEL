@@ -5,6 +5,7 @@ class Cliente : public Persona{
     private:
     string correo;
     string codigoHuesped;
+    int visitas;
 
     public:
     Cliente();
@@ -15,12 +16,16 @@ class Cliente : public Persona{
     void setCodigoHuesped(string);
     string getCodigoHuesped();
 
+    void registrarVisita();
+    int getVisitas();
+
     void mostrarDatos();
 };
 
 Cliente::Cliente(){
     correo = "";
     codigoHuesped = "";
+    visitas = 0;
 }
 
 void Cliente::setCorreo(string correo){
@@ -37,6 +42,14 @@ string Cliente::getCodigoHuesped(){
     return this -> codigoHuesped;
 }
 
+void Cliente::registrarVisita(){
+    this -> visitas++;
+}
+
+int Cliente::getVisitas(){
+    return this -> visitas;
+}
+
 void Cliente::mostrarDatos(){
     cout<<"---CLIENTE---"<<endl;
     cout<<"Nombre: "<<getNombre()<<endl;
@@ -45,4 +58,16 @@ void Cliente::mostrarDatos(){
     cout<<"RFC: "<<getRFC()<<endl;
     cout<<"Correo electronico: "<<correo<<endl;
     cout<<"Codigo de huesped: "<<codigoHuesped<<endl;
+    cout<<"Visitas registradas: "<<visitas<<endl;
+
+    cout<<"Nivel de Lealtad: ";
+    if(visitas >= 10) {
+        cout << "Oro (20% de descuento en rentas)" << endl;
+    } 
+    else if(visitas >= 5) {
+        cout << "Plata (10% de descuento en rentas)" << endl;
+    } 
+    else {
+        cout << "Clasico (Tarifa estandar)" << endl;
+    }
 }
